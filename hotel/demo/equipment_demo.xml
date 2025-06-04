@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <!-- Mini Bar -->
+        <record id="demo_equipment_1" model="hotel.equipment">
+            <field name="name">Mini Bar</field>
+            <field name="description">Small refrigerator with drinks and snacks</field>
+            <field name="default_price">15.0</field>
+        </record>
+
+        <!-- 4K TV -->
+        <record id="demo_equipment_2" model="hotel.equipment">
+            <field name="name">4K Ultra HD TV</field>
+            <field name="description">High-resolution television with premium channels</field>
+            <field name="default_price">10.0</field>
+        </record>
+
+        <!-- Extra Bed -->
+        <record id="demo_equipment_3" model="hotel.equipment">
+            <field name="name">Extra Bed</field>
+            <field name="description">Additional bed for a third guest</field>
+            <field name="default_price">25.0</field>
+        </record>
+
+        <!-- Air Conditioning -->
+        <record id="demo_equipment_4" model="hotel.equipment">
+            <field name="name">Air Conditioning</field>
+            <field name="description">Climate control system</field>
+            <field name="default_price">5.0</field>
+        </record>
+
+        <!-- Safe Deposit Box -->
+        <record id="demo_equipment_5" model="hotel.equipment">
+            <field name="name">Safe Deposit Box</field>
+            <field name="description">Secure storage for valuables</field>
+            <field name="default_price">8.0</field>
+        </record>
+
+        <!-- Wi-Fi Premium -->
+        <record id="demo_equipment_6" model="hotel.equipment">
+            <field name="name">Wi-Fi Premium</field>
+            <field name="description">High-speed internet access</field>
+            <field name="default_price">12.0</field>
+        </record>
+
+        <!-- Breakfast Buffet -->
+        <record id="demo_equipment_7" model="hotel.equipment">
+            <field name="name">Breakfast Buffet</field>
+            <field name="description">Unlimited breakfast with various options</field>
+            <field name="default_price">20.0</field>
+        </record>
+
+        <!-- Room Service -->
+        <record id="demo_equipment_8" model="hotel.equipment">
+            <field name="name">Room Service</field>
+            <field name="description">24/7 food delivery to the room</field>
+            <field name="default_price">18.0</field>
+        </record>
+
+        <!-- Laundry Service -->
+        <record id="demo_equipment_9" model="hotel.equipment">
+            <field name="name">Laundry Service</field>
+            <field name="description">Washing and ironing clothes</field>
+            <field name="default_price">30.0</field>
+        </record>
+
+        <!-- Bathrobe & Slippers -->
+        <record id="demo_equipment_10" model="hotel.equipment">
+            <field name="name">Bathrobe and Slippers</field>
+            <field name="description">Luxury bathrobe and comfortable slippers</field>
+            <field name="default_price">10.0</field>
+        </record>
+
+        <!-- Coffee Machine -->
+        <record id="demo_equipment_11" model="hotel.equipment">
+            <field name="name">Coffee Machine</field>
+            <field name="description">Premium coffee maker with capsules</field>
+            <field name="default_price">12.0</field>
+        </record>
+
+        <!-- Balcony/ Terrace -->
+        <record id="demo_equipment_12" model="hotel.equipment">
+            <field name="name">Balcony/ Terrace</field>
+            <field name="description">Private outdoor space with seating</field>
+            <field name="default_price">15.0</field>
+        </record>
+
+        <!-- Jacuzzi -->
+        <record id="demo_equipment_13" model="hotel.equipment">
+            <field name="name">Jacuzzi</field>
+            <field name="description">Hot tub for relaxation</field>
+            <field name="default_price">50.0</field>
+        </record>
+
+        <!-- Parking Space -->
+        <record id="demo_equipment_14" model="hotel.equipment">
+            <field name="name">Parking Space</field>
+            <field name="description">Reserved parking spot</field>
+            <field name="default_price">10.0</field>
+        </record>
+
+        <!-- Pet-Friendly Amenities -->
+        <record id="demo_equipment_15" model="hotel.equipment">
+            <field name="name">Pet-Friendly Amenities</field>
+            <field name="description">Includes pet bed, bowls, and treats</field>
+            <field name="default_price">20.0</field>
+        </record>
+    </data>
+</odoo>

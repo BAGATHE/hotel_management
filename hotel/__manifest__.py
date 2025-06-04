@@ -24,10 +24,14 @@ Long description of module's purpose
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+         'security/ir.model.access.csv',
     ],
     # only loaded in demonstration mode
     'demo': [
+        'demo/room_type_demo.xml',
+        'demo/room_demo.xml',
+        'demo/equipment_demo.xml',
+        'demo/room_equipment_demo.xml',
 
     ],
     'installable': True,

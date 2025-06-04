@@ -1,2 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_etech_addons/hotel_project/hotel_etech_addons/hotel_project/hotel,etech_addons/hotel_project/hotel.etech_addons/hotel_project/hotel,model_etech_addons/hotel_project/hotel_etech_addons/hotel_project/hotel,base.group_user,1,1,1,1
+hotel.access_hotel_room_type,access_hotel_room_type,hotel.model_hotel_room_type,base.group_user,1,1,1,1
+hotel.access_hotel_equipment,access_hotel_equipment,hotel.model_hotel_equipment,base.group_user,1,1,1,1
+hotel.access_hotel_room,access_hotel_room,hotel.model_hotel_room,base.group_user,1,1,1,1
+hotel.access_hotel_room_equipment,access_hotel_room_equipment,hotel.model_hotel_room_equipment,base.group_user,1,1,1,1
+hotel.access_hotel_reservation,access_hotel_reservation,hotel.model_hotel_reservation,base.group_user,1,1,1,1
+hotel.access_hotel_reservation_line,access_hotel_reservation_line,hotel.model_hotel_reservation_line,base.group_user,1,1,1,1
