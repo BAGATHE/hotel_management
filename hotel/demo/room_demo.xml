@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Standard Rooms -->
+        <record id="demo_room_standard_1" model="hotel.room">
+            <field name="name">Standard Room 101</field>
+            <field name="description">Comfortable standard room on first floor.</field>
+            <field name="base_price">50.0</field>
+            <field name="max_allowed_person">2</field>
+            <field name="state">available</field>
+            <field name="room_type_id" ref="demo_room_type_1"/>
+        </record>
+
+        <record id="demo_room_standard_2" model="hotel.room">
+            <field name="name">Standard Room 102</field>
+            <field name="description">Bright room with a small balcony.</field>
+            <field name="base_price">50.0</field>
+            <field name="max_allowed_person">2</field>
+            <field name="state">available</field>
+            <field name="room_type_id" ref="demo_room_type_1"/>
+        </record>
+
+        <record id="demo_room_standard_3" model="hotel.room">
+            <field name="name">Standard Room 103</field>
+            <field name="description">Quiet room near the garden area.</field>
+            <field name="base_price">50.0</field>
+            <field name="max_allowed_person">2</field>
+            <field name="state">available</field>
+            <field name="room_type_id" ref="demo_room_type_1"/>
+        </record>
+
+        <!-- Executive Rooms -->
+        <record id="demo_room_executive_1" model="hotel.room">
+            <field name="name">Executive Room 201</field>
+            <field name="description">Spacious room with work desk and minibar.</field>
+            <field name="base_price">80.0</field>
+            <field name="max_allowed_person">2</field>
+            <field name="state">available</field>
+            <field name="room_type_id" ref="demo_room_type_2"/>
+        </record>
+
+        <record id="demo_room_executive_2" model="hotel.room">
+            <field name="name">Executive Room 202</field>
+            <field name="description">City view, premium bedding, perfect for executives.</field>
+            <field name="base_price">80.0</field>
+            <field name="max_allowed_person">2</field>
+            <field name="state">available</field>
+            <field name="room_type_id" ref="demo_room_type_2"/>
+        </record>
+
+        <record id="demo_room_executive_3" model="hotel.room">
+            <field name="name">Executive Room 203</field>
+            <field name="description">Ideal for long stays, with extra storage space.</field>
+            <field name="base_price">80.0</field>
+            <field name="max_allowed_person">3</field>
+            <field name="state">available</field>
+            <field name="room_type_id" ref="demo_room_type_2"/>
+        </record>
+
+        <!-- Deluxe Rooms -->
+        <record id="demo_room_deluxe_1" model="hotel.room">
+            <field name="name">Deluxe Room 301</field>
+            <field name="description">Luxurious suite with sea view and king-size bed.</field>
+            <field name="base_price">120.0</field>
+            <field name="max_allowed_person">2</field>
+            <field name="state">available</field>
+            <field name="room_type_id" ref="demo_room_type_3"/>
+        </record>
+
+        <record id="demo_room_deluxe_2" model="hotel.room">
+            <field name="name">Deluxe Room 302</field>
+            <field name="description">Spacious suite with private lounge area.</field>
+            <field name="base_price">120.0</field>
+            <field name="max_allowed_person">3</field>
+            <field name="state">available</field>
+            <field name="room_type_id" ref="demo_room_type_3"/>
+        </record>
+
+        <record id="demo_room_deluxe_3" model="hotel.room">
+            <field name="name">Deluxe Room 303</field>
+            <field name="description">High-end design, jacuzzi, and premium services.</field>
+            <field name="base_price">120.0</field>
+            <field name="max_allowed_person">4</field>
+            <field name="state">available</field>
+            <field name="room_type_id" ref="demo_room_type_3"/>
+        </record>
+
+    </data>
+</odoo>

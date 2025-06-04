@@ -1,0 +1,73 @@
+<odoo>
+    <data noupdate="1">
+
+        <!-- Executive Room 201: Mini Bar + 4K TV -->
+        <record id="room_eq_executive_201_minibar" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_executive_1"/>
+            <field name="equipment_id" ref="demo_equipment_1"/>
+        </record>
+        <record id="room_eq_executive_201_tv" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_executive_1"/>
+            <field name="equipment_id" ref="demo_equipment_2"/>
+        </record>
+
+        <!-- Executive Room 202: Safe Deposit Box -->
+        <record id="room_eq_executive_202_safe" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_executive_2"/>
+            <field name="equipment_id" ref="demo_equipment_5"/>
+        </record>
+
+        <!-- Executive Room 203: Extra Bed + Air Conditioning -->
+        <record id="room_eq_executive_203_bed" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_executive_3"/>
+            <field name="equipment_id" ref="demo_equipment_3"/>
+        </record>
+        <record id="room_eq_executive_203_ac" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_executive_3"/>
+            <field name="equipment_id" ref="demo_equipment_4"/>
+        </record>
+
+        <!-- Deluxe Room 301: Jacuzzi + Wi-Fi Premium + Coffee Machine -->
+        <record id="room_eq_deluxe_301_jacuzzi" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_deluxe_1"/>
+            <field name="equipment_id" ref="demo_equipment_13"/>
+        </record>
+        <record id="room_eq_deluxe_301_wifi" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_deluxe_1"/>
+            <field name="equipment_id" ref="demo_equipment_6"/>
+        </record>
+        <record id="room_eq_deluxe_301_coffee" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_deluxe_1"/>
+            <field name="equipment_id" ref="demo_equipment_11"/>
+        </record>
+
+        <!-- Deluxe Room 302: Lounge (Room Service) + Balcony + Safe -->
+        <record id="room_eq_deluxe_302_service" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_deluxe_2"/>
+            <field name="equipment_id" ref="demo_equipment_8"/>
+        </record>
+        <record id="room_eq_deluxe_302_balcony" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_deluxe_2"/>
+            <field name="equipment_id" ref="demo_equipment_12"/>
+        </record>
+        <record id="room_eq_deluxe_302_safe" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_deluxe_2"/>
+            <field name="equipment_id" ref="demo_equipment_5"/>
+        </record>
+
+        <!-- Deluxe Room 303: Jacuzzi + Laundry + Bathrobe -->
+        <record id="room_eq_deluxe_303_jacuzzi" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_deluxe_3"/>
+            <field name="equipment_id" ref="demo_equipment_13"/>
+        </record>
+        <record id="room_eq_deluxe_303_laundry" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_deluxe_3"/>
+            <field name="equipment_id" ref="demo_equipment_9"/>
+        </record>
+        <record id="room_eq_deluxe_303_bathrobe" model="hotel.room.equipment">
+            <field name="room_id" ref="demo_room_deluxe_3"/>
+            <field name="equipment_id" ref="demo_equipment_10"/>
+        </record>
+
+    </data>
+</odoo>
