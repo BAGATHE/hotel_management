@@ -25,12 +25,12 @@ class HotelReservation(models.Model):
     def _compute_reservation_name(self):
         for reservation in self:
             if reservation.partner_id:
-                self.name = 'Reservation in the name of' + ' ' + reservation.partner_id.name
+                reservation.name = 'Reservation in the name of' + ' ' + reservation.partner_id.name
 
     @api.depends('check_in', 'check_out')
     def _compute_duration(self):
         for reservation in self:
             if reservation.check_in and reservation.check_out:
-                self.duration = (reservation.check_out - reservation.check_in).days
+                reservation.duration = (reservation.check_out - reservation.check_in).days
             else:
-                self.duration = 0
+                reservation.duration = 0

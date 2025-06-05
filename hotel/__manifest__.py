@@ -19,12 +19,16 @@ Long description of module's purpose
     'license': 'LGPL-3',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base','website','portal','auth_signup'],
     'icon': '/hotel/static/src/img/hotel.svg',
 
     # always loaded
     'data': [
          'security/ir.model.access.csv',
+        'views/hotel_room_views.xml',
+        'views/hotel_room_type_views.xml',
+        'views/hotel_equipment_views.xml',
+        'views/hotel_menus_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

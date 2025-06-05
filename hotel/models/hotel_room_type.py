@@ -12,3 +12,7 @@ class HotelRoomType(models.Model):
         'hotel.room',
         'room_type_id',
         string='Room Types')
+
+    _sql_constraints = [
+        ('check_unique_name','unique(name)','name has already been used'),
+    ]
