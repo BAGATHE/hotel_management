@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+         <template id="custom_homepage" name="Page d'accueil personnalisée">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'homepage'"/>
+
+            <div id="wrap" class="oe_structure">
+                <!-- Hero Banner -->
+                <section class="s_text_block bg-primary py-5">
+                    <div class="container text-white text-center">
+                        <h1 class="display-4">Bienvenue chez Nous</h1>
+                        <p class="lead">Découvrez nos meilleures offres hôtelières</p>
+                    </div>
+                </section>
+
+                <!-- Liste des hôtels -->
+                <section class="container py-5">
+                    <h2 class="text-center mb-5">Nos établissements</h2>
+                    <div class="row">
+
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+    </data>
+</odoo>

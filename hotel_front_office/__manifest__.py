@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'hotel',
+    'name': "hotel_front_office",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
@@ -8,7 +8,7 @@
 Long description of module's purpose
     """,
 
-    'author': 'Lolo',
+     'author': 'Lolo',
      'website': "https://github.com/BAGATHE",
 
     # Categories can be used to filter modules in modules listing
@@ -19,26 +19,22 @@ Long description of module's purpose
     'license': 'LGPL-3',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
-    'icon': '/hotel/static/src/img/hotel.svg',
+    'depends': ['hotel','website','auth_signup'],
 
     # always loaded
     'data': [
-         'security/ir.model.access.csv',
-        'views/hotel_room_views.xml',
-        'views/hotel_room_type_views.xml',
-        'views/hotel_equipment_views.xml',
-        'views/hotel_menus_views.xml',
+        # 'security/ir.model.access.csv',
+        'views/custom_menus.xml',
+        'views/home_page.xml',
+        'views/reservation_page.xml',
+        'views/list_reservations.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
-        'demo/room_type_demo.xml',
-        'demo/room_demo.xml',
-        'demo/equipment_demo.xml',
-        'demo/room_equipment_demo.xml',
-
+        'demo/demo.xml',
     ],
-    'installable': True,
-    'application': True,
+    'installable':True,
+    'application':False,
+
 }
 

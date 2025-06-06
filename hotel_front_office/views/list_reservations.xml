@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <data>
+       <template id="user_reservations_template" name="User Reservations">
+    <t t-call="website.layout">
+        <section class="container py-5">
+            <h2 class="mb-4">My Reservations</h2>
+
+            <t t-if="reservations">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Room</th>
+                            <th>Check-In</th>
+                            <th>Check-Out</th>
+                            <th>Duration</th>
+                            <th>Total</th>
+                             <th>Status</th>
+                             <th>Detail</th>
+                            <th>action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="reservations" t-as="res">
+                            <tr>
+                                <td><t t-esc="res.id"/></td>
+                                <td><t t-esc="res.room_id.name"/></td>
+                                <td><t t-esc="res.check_in"/></td>
+                                <td><t t-esc="res.check_out"/></td>
+                                <td><t t-esc="res.duration"/> nights</td>
+                                <td><t t-esc="res.total_price"/></td>
+                                 <td><t t-esc="res.state"/></td>
+                                <td>
+                                    <a t-att-href="'/hotel/reservation?reservation_id=%s ' % (res.id)"
+                                       class="btn btn-primary mt-3 w-100">
+                                        Detail
+                                    </a>
+                                </td>
+                                <td>
+                                    <t t-if="res.state == 'checked_in'">
+                                        <a t-att-href="'/hotel/reservation/cancel?reservation_id=%s' % (res.id)"
+                                           class="btn btn-info mt-3 w-100">
+                                            Free room
+                                        </a>
+                                    </t>
+                                    <t t-if="res.state == 'reserved'">
+                                        <a t-att-href="'/hotel/reservation/cancel?reservation_id=%s' % (res.id)"
+                                           class="btn btn-danger mt-3 w-100">
+                                            Cancel
+                                        </a>
+                                    </t>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </t>
+            <t t-else="">
+                <p>You have no reservations yet.</p>
+            </t>
+        </section>
+    </t>
+</template>
+
+   </data>
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_etech_addons/hotel_project/hotel_front_office_etech_addons/hotel_project/hotel_front_office,etech_addons/hotel_project/hotel_front_office.etech_addons/hotel_project/hotel_front_office,model_etech_addons/hotel_project/hotel_front_office_etech_addons/hotel_project/hotel_front_office,base.group_user,1,1,1,1
