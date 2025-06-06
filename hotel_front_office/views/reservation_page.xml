@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <data>
+       <template id="reservation_form" name="Reservation Form">
+           <t t-call="website.layout">
+    <section class="container py-5">
+        <div class="card shadow rounded-3 p-4">
+            <h2 class="mb-3">Reservation Summary</h2>
+            <p><strong>Room:</strong> <t t-esc="room.name"/></p>
+            <p><strong>From:</strong>
+                <input type="date" name="checkin" t-att-value="checkin"/>
+            </p>
+            <p><strong>To:</strong>
+                <input type="date" name="checkout" t-att-value="checkout"/>
+            </p>
+            <p><strong>Guests:</strong>
+                <input type="number" name="guests" t-att-value="guests" min="1" max="4"/>
+            </p>
+            <p><strong>Price:</strong> <t t-esc="room.price"/>$</p>
+            <p><strong>Equipments :</strong></p>
+                        <ul>
+                            <t t-foreach="room.room_equipment_ids" t-as="eq">
+                                <li><t t-esc="eq.equipment_id.name" /></li>
+                            </t>
+                        </ul>
+
+            <form action="/hotel/confirm_reservation" method="POST" t-attf-action="/hotel/confirm_reservation">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <input type="hidden" name="room_id" t-att-value="room.id"/>
+                <input type="hidden" name="checkin" t-att-value="checkin"/>
+                <input type="hidden" name="checkout" t-att-value="checkout"/>
+                <input type="hidden" name="guests" t-att-value="guests"/>
+
+                <div class="mt-4">
+                    <h5>Additional Equipment (Optional)</h5>
+                    <div class="row">
+                        <t t-foreach="equipments" t-as="eq">
+                            <div class="col-md-4 my-2">
+                                <label>
+                                    <input type="checkbox" name="equipment_ids" t-att-value="eq.id"/>
+                                    <t t-esc="eq.name"/> -  <t t-esc="eq.default_price"/> $
+                                </label>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success mt-4">Confirm Reservation</button>
+            </form>
+        </div>
+    </section>
+           </t>
+</template>
+
+
+
+
+       <template id="reservation_detail_template" name="Reservation Detail Page">
+    <t t-call="website.layout">
+        <div class="container mt-5">
+            <div class="card shadow p-4">
+                <h2 class="mb-4">Reservation Details</h2>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Name:</strong> <t t-esc="reservation.name"/></li>
+                    <li class="list-group-item"><strong>Customer:</strong> <t t-esc="reservation.partner_id.name"/></li>
+                    <li class="list-group-item"><strong>Room Type:</strong> <t t-esc="reservation.room_id.room_type_id.name"/></li>
+                    <li class="list-group-item"><strong>Room:</strong> <t t-esc="reservation.room_id.name"/></li>
+                    <li class="list-group-item"><strong>Check-in:</strong> <t t-esc="reservation.check_in"/></li>
+                    <li class="list-group-item"><strong>Check-out:</strong> <t t-esc="reservation.check_out"/></li>
+                    <li class="list-group-item"><strong>Duration:</strong> <t t-esc="reservation.duration"/> day(s)</li>
+                    <li class="list-group-item"><strong>Room Price:</strong> <t t-esc="reservation.room_id.price"/> $</li>
+                     <li class="list-group-item"><strong>Default Equipments </strong>
+                        <ul>
+                            <t t-if="len(reservation.room_id.room_equipment_ids)> 0">
+                                <t t-foreach="reservation.room_id.room_equipment_ids" t-as="room_equipment">
+                                <li><t t-esc="room_equipment.equipment_id.name" /> </li>
+                                </t>
+                            </t>
+                            <t t-else="" >
+                                <li class="list-group-item">
+                                    None
+                                </li>
+                            </t>
+                        </ul>
+                    </li>
+                    <li class="list-group-item"><strong>Equipments added:</strong>
+                        <ul>
+                            <t t-foreach="reservation.reservation_line_ids" t-as="res_line">
+                                <li><t t-esc="res_line.equipment_id.name" /> - <t t-esc="res_line.equipment_id.default_price" /> $ </li>
+                            </t>
+                        </ul>
+                    </li>
+                    <li class="list-group-item"><strong>Total Price Reservation:</strong> <t t-esc="reservation.total_price"/> $</li>
+                    <li class="list-group-item"><strong>Status:</strong> <t t-esc="reservation.state"/></li>
+                </ul>
+            </div>
+        </div>
+    </t>
+</template>
+
+
+   </data>
+</odoo>

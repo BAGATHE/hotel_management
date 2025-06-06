@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="etech_addons/hotel_project/hotel_front_office.list">
+      <field name="name">etech_addons/hotel_project/hotel_front_office list</field>
+      <field name="model">etech_addons/hotel_project/hotel_front_office.etech_addons/hotel_project/hotel_front_office</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </list>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="etech_addons/hotel_project/hotel_front_office.action_window">
+      <field name="name">etech_addons/hotel_project/hotel_front_office window</field>
+      <field name="res_model">etech_addons/hotel_project/hotel_front_office.etech_addons/hotel_project/hotel_front_office</field>
+      <field name="view_mode">list,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="etech_addons/hotel_project/hotel_front_office.action_server">
+      <field name="name">etech_addons/hotel_project/hotel_front_office server</field>
+      <field name="model_id" ref="model_etech_addons/hotel_project/hotel_front_office_etech_addons/hotel_project/hotel_front_office"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "list,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="etech_addons/hotel_project/hotel_front_office" id="etech_addons/hotel_project/hotel_front_office.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="etech_addons/hotel_project/hotel_front_office.menu_1" parent="etech_addons/hotel_project/hotel_front_office.menu_root"/>
+    <menuitem name="Menu 2" id="etech_addons/hotel_project/hotel_front_office.menu_2" parent="etech_addons/hotel_project/hotel_front_office.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="etech_addons/hotel_project/hotel_front_office.menu_1_list" parent="etech_addons/hotel_project/hotel_front_office.menu_1"
+              action="etech_addons/hotel_project/hotel_front_office.action_window"/>
+    <menuitem name="Server to list" id="etech_addons/hotel_project/hotel_front_office" parent="etech_addons/hotel_project/hotel_front_office.menu_2"
+              action="etech_addons/hotel_project/hotel_front_office.action_server"/>
+-->
+  </data>
+</odoo>

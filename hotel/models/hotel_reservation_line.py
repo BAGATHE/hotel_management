@@ -8,7 +8,7 @@ class HotelReservationLine(models.Model):
     reservation_id = fields.Many2one('hotel.reservation', string='Reservation', required=True)
     equipment_id = fields.Many2one('hotel.equipment', string='Equipment', required=True)
     quantity = fields.Integer(string='Quantity', required=True, default=1)
-    unit_price = fields.Float(string='Unit Price', required=True, compute='_compute_unit_price', store=True)
+    unit_price = fields.Float(string='Unit Price', required=True, compute='_compute_unit_price', store=True,default=1)
     total_price = fields.Float(string='Total', compute='_compute_total_price', store=True, readonly=True)
 
     _sql_constraints = [

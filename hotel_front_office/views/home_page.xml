@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="custom_homepage" name="Page d'accueil personnalisée">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'homepage'"/>
+
+            <div id="wrap" class="oe_structure">
+                <!-- Hero Banner with Background Image and Overlay Card -->
+                <section class="position-relative" style="height: 500px; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/hotel_front_office/static/src/img/hotel.jpg') no-repeat center center; background-size: cover;">
+                    <div class="container h-100">
+                        <div class="row h-100 align-items-center">
+                            <div class="col-lg-6">
+                                <!-- Title Section -->
+                                <h1 class="text-white mb-4" style="font-size: 2.5rem; font-weight: 700;">Trade Tower Hotel  </h1>
+                                <p class="text-white mb-5" style="font-size: 1.1rem;">
+                                    Book with confidence,<br/>
+                                    our rooms are available in real time.
+                                </p>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="bg-white-50 rounded p-4" style="background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px);">
+                                    <h3 class="text-center mb-4">Reserve A Room</h3>
+                                    <form action="/" method="get" class="form-horizontal">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Check In</label>
+                                                <input type="date" name="checkin" class="form-control" required="required"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Check Out</label>
+                                                <input type="date" name="checkout" class="form-control" required="required"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">No. Of Guests</label>
+                                            <select name="guests" class="form-select">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary w-100 py-2">
+                                            Check Availability
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="container py-5">
+                    <h1 class="text-center">free room of the day</h1>
+    <div class="row">
+        <t t-foreach="rooms" t-as="room">
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <t t-esc="room.name" />
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <t t-esc="room.room_type_id.name" />
+                        </h6>
+                        <p class="card-text">
+                            <t t-esc="room.description" />
+                        </p>
+
+                        <p>
+                            <strong>Max Guests :</strong>
+                            <t t-esc="room.max_allowed_person" />
+                        </p>
+
+                        <p>
+                            <strong>Price :</strong>
+                            $<t t-esc="room.price" />
+                        </p>
+
+                        <p><strong>Equipments :</strong></p>
+                        <ul>
+                            <t t-foreach="room.room_equipment_ids" t-as="eq">
+                                <li><t t-esc="eq.equipment_id.name" /></li>
+                            </t>
+                        </ul>
+
+                        <a t-att-href="'/hotel/reserve?room_id=%s&amp;checkin=%s&amp;checkout=%s&amp;guests=%s' % (room.id, checkin, checkout, guests)"
+                           class="btn btn-primary mt-3 w-100">
+                            Reserve Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </div>
+</section>
+
+
+                <!-- Additional Content Sections can be added here -->
+            </div>
+        </t>
+    </template>
+</odoo>
