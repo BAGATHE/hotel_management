@@ -53,10 +53,15 @@
                     </div>
                 </section>
                 <section class="container py-5">
+                    <div class="text-center mb-4">
+                        <a t-att-href="'/hotel/reserve'"  class="btn btn-primary btn-lg px-5 py-3" >
+                            <i class="fa fa-calendar-check-o mr-2"/> View my reservation
+                        </a>
+                    </div>
                     <h1 class="text-center">free room of the day</h1>
                     <div class="text-center mb-4">
                         <a t-att-href="'/'"  class="btn btn-primary btn-lg px-5 py-3" >
-                            <i class="fa fa-refresh mr-2"/> Refresh
+                            <i class="fa fa-refresh mr-2"/> Refresh room list
                         </a>
                     </div>
     <div class="row">
