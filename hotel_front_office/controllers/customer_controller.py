@@ -124,6 +124,7 @@ class CustomerController(http.Controller):
             'room_id': room_id,
             'partner_id': partner.id,
             'state': 'reserved',
+            'guests':guests,
         })
 
         for eq_id in equipment_ids:
