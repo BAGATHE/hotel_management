@@ -5,7 +5,7 @@ class HotelReservationLine(models.Model):
     _name = 'hotel.reservation.line'
     _description = 'Hotel Reservation Line'
 
-    reservation_id = fields.Many2one('hotel.reservation', string='Reservation', required=True)
+    reservation_id = fields.Many2one('hotel.reservation', string='Reservation', required=True,ondelete='cascade')
     equipment_id = fields.Many2one('hotel.equipment', string='Equipment', required=True)
     quantity = fields.Integer(string='Quantity', required=True, default=1)
     unit_price = fields.Float(string='Unit Price', required=True, compute='_compute_unit_price', store=True,default=1)

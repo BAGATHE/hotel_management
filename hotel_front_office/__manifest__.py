@@ -19,7 +19,7 @@ Long description of module's purpose
     'license': 'LGPL-3',
 
     # any module necessary for this one to work correctly
-    'depends': ['hotel','website','auth_signup'],
+    'depends': ['hotel','website'],
 
     # always loaded
     'data': [

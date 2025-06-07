@@ -2,7 +2,10 @@ from odoo import http
 from odoo.http import request
 from datetime import date, timedelta, datetime
 from odoo.exceptions import UserError
-
+from ..utils.response_utils import OdooResponseUtils
+import json
+from odoo import fields
+import traceback
 
 def _parse_reservation_params(checkin, checkout, guests):
     today = date.today()
@@ -129,6 +132,9 @@ class CustomerController(http.Controller):
                 'equipment_id': int(eq_id),
                 'unit_price':1
             })
+        room = request.env['hotel.room'].sudo().browse(int(room_id)) if room_id else None
+        if room and room.exists():
+            room.write({'state':'reserved'})
 
         return request.redirect('/hotel/reservations')
 
@@ -160,4 +166,164 @@ class CustomerController(http.Controller):
         reservation = request.env['hotel.reservation'].sudo().browse(int(reservation_id)) if reservation_id else None
         if reservation:
             reservation.write({'state': 'cancelled'})
+            room = request.env['hotel.room'].sudo().browse(int(reservation.room_id.id)) if reservation.room_id.id else None
+            if room and room.exists():
+                room.write({'state': 'available'})
         return request.redirect('/hotel/reservations')
+
+    @http.route('/hotel/reservation/free', type='http', auth='user', website=True)
+    def free_room(self, reservation_id=None, **kwargs):
+        reservation = request.env['hotel.reservation'].sudo().browse(int(reservation_id)) if reservation_id else None
+        if reservation:
+            reservation.write({'state': 'checked_out'})
+            room = request.env['hotel.room'].sudo().browse(
+                int(reservation.room_id.id)) if reservation.room_id.id else None
+            if room and room.exists():
+                room.write({'state': 'available'})
+        return request.redirect('/hotel/reservations')
+
+    """------------------------CALL APi-----------------------------------------------------------------------------------"""
+
+
+
+
+
+    @http.route('/api/equipments', auth='public', type='http', methods=['GET'], csrf=False, website=False)
+    def api_get_equipments(self, **kw):
+        try:
+            equipments = request.env['hotel.equipment'].sudo().search([])
+            equipment_data = equipments.read(['id', 'name', 'default_price'])
+            return request.make_json_response(OdooResponseUtils.success(data=equipment_data))
+
+        except Exception as e:
+            return request.make_json_response(
+                OdooResponseUtils.error(error=str(e),code=500))
+
+    @http.route('/api/hotel/reservation', type='http', auth='public', methods=['POST'], csrf=False,website=False)
+    def api_reservation(self, **post):
+        try:
+            data = json.loads(request.httprequest.data)
+
+            room_id = data.get('room_id')
+            checkin = fields.Date.to_date(data.get('checkin'))
+            checkout = fields.Date.to_date(data.get('checkout'))
+            guests = data.get('guests', 1)
+            partner_id = data.get('partner_id')
+            equipment_ids = data.get('equipment_ids', [])
+
+            if (checkout - checkin).days <= 0:
+                return request.make_json_response(OdooResponseUtils.error(
+                    error='Invalid dates: Check-out must be after check-in',
+                    code=400
+                ))
+
+            reservation = request.env['hotel.reservation'].sudo().create({
+                'check_in': checkin,
+                'check_out': checkout,
+                'room_id': room_id,
+                'partner_id': partner_id,
+                'guests': guests,
+                'state': 'reserved',
+            })
+
+            for eq_id in equipment_ids:
+                request.env['hotel.reservation.line'].sudo().create({
+                    'reservation_id': reservation.id,
+                    'equipment_id': int(eq_id),
+                    'unit_price': 1
+                })
+
+            request.env['hotel.room'].sudo().browse(room_id).write({'state': 'reserved'})
+
+            return request.make_json_response(OdooResponseUtils.success(
+                data={
+                    'reservation_id': reservation.id,
+                    'confirmation_number': reservation.name,
+                    'total_amount': reservation.total_price
+                },
+                code=201,
+                message='Reservation created successfully'
+            ))
+
+        except ValueError as e:
+            return request.make_json_response(OdooResponseUtils.error(
+                error='Invalid data format',
+                error_details=str(e),
+                code=400
+            ))
+
+        except Exception as e:
+
+            traceback.print_exc()
+            return request.make_json_response(OdooResponseUtils.error(
+                error='Reservation failed',
+                error_details=str(e),
+                code=500
+            ))
+
+    @http.route('/api/hotel/rooms', type='http', auth='public', methods=['GET'], csrf=False, website=False)
+    def api_available_room(self, **kw):
+            try:
+                data = json.loads(request.httprequest.data)
+
+                checkin = fields.Date.to_date(data.get('checkin'))
+                checkout = fields.Date.to_date(data.get('checkout'))
+                guests = data.get('guests', 2)
+
+                if (checkout - checkin).days <= 0:
+                    return request.make_json_response(OdooResponseUtils.error(
+                        error='Invalid dates: Check-out must be after check-in',
+                        code=400
+                    ))
+
+                overlapping_res = request.env['hotel.reservation'].sudo().search([
+                    ('state', 'not in', ['cancelled']),
+                    ('check_in', '<=', checkout),
+                    ('check_out', '>=', checkin),
+                ]).mapped('room_id.id')
+
+                rooms = request.env['hotel.room'].sudo().search([('id', 'not in', overlapping_res),('max_allowed_person', '>=', guests)])
+                room_data = rooms.read([])
+                return request.make_json_response(OdooResponseUtils.success(data=room_data))
+
+            except ValueError as e:
+                return request.make_json_response(OdooResponseUtils.error(
+                    error='Invalid data format',
+                    error_details=str(e),
+                    code=400
+                ))
+
+            except Exception as e:
+
+                traceback.print_exc()
+                return request.make_json_response(OdooResponseUtils.error(
+                    error='check room failed',
+                    error_details=str(e),
+                    code=500
+                ))
+
+    @http.route('/api/reservations', auth='public', type='http', methods=['GET'], csrf=False, website=False)
+    def api_get_reservation(self, **kw):
+        try:
+            reservations = request.env['hotel.reservation'].sudo().search([])
+            reservation_data = reservations.read(['id', 'name', 'state'])
+            return request.make_json_response(OdooResponseUtils.success(data=reservation_data))
+
+        except Exception as e:
+            return request.make_json_response(
+                OdooResponseUtils.error(error=str(e), code=500))
+
+
+    @http.route('/api/hotel/reservation/free', type='http', auth='public', methods=['GET'], csrf=False, website=False)
+    def api_free_room(self, **kw):
+        data = json.loads(request.httprequest.data)
+        reservation_id = data.get('reservation_id')
+
+        reservation = request.env['hotel.reservation'].sudo().browse(int(reservation_id)) if reservation_id else None
+        if reservation:
+            reservation.write({'state': 'checked_out'})
+            room = request.env['hotel.room'].sudo().browse(
+                int(reservation.room_id.id)) if reservation.room_id.id else None
+            if room and room.exists():
+                room.write({'state': 'available'})
+        return request.make_json_response(OdooResponseUtils.success(message='room free successfully'))
