@@ -58,9 +58,7 @@
             <field name="guests">2</field>
             <field name="state">reserved</field>
         </record>
-        <record id="demo_room_deluxe_2" model="hotel.room">
-            <field name="state">reserved</field>
-        </record>
+
 
         <record id="demo_reservation_3" model="hotel.reservation">
             <field name="check_in">2025-06-15</field>
@@ -70,9 +68,7 @@
             <field name="guests">2</field>
             <field name="state">reserved</field>
         </record>
-        <record id="demo_room_deluxe_3" model="hotel.room">
-            <field name="state">reserved</field>
-        </record>
+
 
     </data>
 </odoo>

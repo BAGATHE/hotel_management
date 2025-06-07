@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
    <data>
+       <!--room reservation views-->
+       <record id="view_room_reservations_popup" model="ir.ui.view">
+           <field name="name">room.reservations.popup.tree</field>
+           <field name="model">hotel.reservation</field>
+           <field name="arch" type="xml">
+               <list decoration-muted="state == 'cancelled'">
+                   <field name="name" string="Ref"/>
+                   <field name="check_in" string="Check-In" widget="date"/>
+                   <field name="check_out" string="Check-Out" widget="date"/>
+                   <field name="partner_id" string="Customer"/>
+                   <field name="state" widget="badge"
+                           decoration-success="state == 'checked_in'"
+                           decoration-danger="state == 'cancelled'"
+                           decoration-info="state == 'reserved'"
+                           decoration-warning="state == 'checked_out'"/>
+                   <button name="action_open_reservation_form"
+                    string="To consult"
+                    type="object"
+                    class="btn-primary"
+                    icon="fa-eye"/>
+               </list>
+           </field>
+       </record>
+
        <record id="hotel_room_view_kanban" model="ir.ui.view">
            <field name="name">hotel.room.view.kanban</field>
            <field name="model">hotel.room</field>
@@ -11,7 +35,6 @@
                            <t t-set="color_class" t-value="
                            {
                             'available': 'bg-success text-white border-success',
-                            'reserved': 'bg-warning text-dark border-warning',
                             'occupied': 'bg-danger text-white border-danger'
                            }[record.state]
                            "/>
@@ -29,17 +52,20 @@
                                <div class="mb-2 text-break">
                                    <field name="description"/>
                                </div>
-                               <div class="d-flex justify-content-end mt-2">
-                                   <field name="state"
-                                          widget="label_selection"
-                                          options="{
-                                          'classes': {
-                                          'available': 'info',
-                                          'reserved': 'warning',
-                                          'occupied': 'danger'
-                                          }
-                                   }"/>
+                               <div class="mb-2 text-break">
+                                   Active Reservation : <field string="Active Reservation" name="active_reservation" />
                                </div>
+                              <div class="d-flex justify-content-between align-items-center mt-2">
+                                  <button type="object" string="view reservations" name="action_view_reservations" class="btn-primary" />
+                                  <field name="state"
+                                         widget="label_selection"
+                                         options="{
+                                         'classes': {
+                                         'available': 'info',
+                                         'occupied': 'danger'
+                                         }
+                                         }"/>
+                              </div>
                            </div>
                        </t>
                    </templates>
@@ -54,7 +80,7 @@
         <form string="Hotel Room">
             <header>
                 <field name="state" widget="statusbar"
-                       statusbar_visible="available,reserved,occupied"/>
+                       statusbar_visible="available,occupied"/>
             </header>
 
             <sheet>
@@ -105,6 +131,10 @@
                    </p>
            </field>
        </record>
+
+
+
+
        
    </data>
 </odoo>
