@@ -5,6 +5,7 @@
             <menuitem id="room_nav" name="Room"  action="room_action"/>
             <menuitem id="room_type_nav" name="Room Type"  action="room_type_action"/>
             <menuitem id="equipment_nav" name="Equipment"  action="equipment_action"/>
+            <menuitem id="reservation_nav" name="Reservation"  action="reservation_action"/>
         </menuitem>
     </data>
 </odoo>

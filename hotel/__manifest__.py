@@ -28,6 +28,7 @@ Long description of module's purpose
         'views/hotel_room_views.xml',
         'views/hotel_room_type_views.xml',
         'views/hotel_equipment_views.xml',
+        'views/hotel_reservation_views.xml',
         'views/hotel_menus_views.xml',
     ],
     # only loaded in demonstration mode

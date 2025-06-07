@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <data>
+
+       <record id="view_hotel_reservation_calendar" model="ir.ui.view">
+        <field name="name">hotel.reservation</field>
+        <field name="model">hotel.reservation</field>
+        <field name="arch" type="xml">
+            <calendar string="Hotel Reservations"
+                      date_start="check_in"
+                      date_stop="check_out"
+                      color="room_id"
+            event_open_popup="True">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+      <record id="view_form_reservation" model="ir.ui.view">
+    <field name="name">Hotel Reservation Form</field>
+    <field name="model">hotel.reservation</field>
+    <field name="arch" type="xml">
+        <form string="Reservation Form">
+            <header>
+                <!-- Affichage du statut avec widget statusbar -->
+                <field name="state" widget="statusbar"
+                       statusbar_visible="reserved,checked_in,checked_out,cancelled"/>
+
+                <button name="action_check_in" type="object" string="Check In"
+                        class="btn-primary" invisible="state in ['checked_in','cancelled','checked_out']"/>
+
+                <button name="action_check_out" type="object" string="Check Out"
+                        class="btn-success" invisible="state in ['reserved','cancelled','checked_out']"/>
+
+                <button name="action_cancel" type="object" string="Cancel"
+                        class="btn-danger" invisible="state in ['checked_in','checked_out']"/>
+            </header>
+
+            <sheet>
+                <div class="oe_title">
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </div>
+
+                <group col="2">
+                    <field name="partner_id"/>
+                    <field name="room_id"/>
+                    <field name="room_price"/>
+                    <field name="check_in"/>
+                    <field name="check_out"/>
+                    <field name="duration"/>
+                    <field name="total_price" readonly="1"/>
+                </group>
+
+                <notebook>
+                    <page string="Reservation Lines">
+                        <field name="reservation_line_ids">
+                            <list editable="bottom">
+                                <field name="equipment_id"/>
+                                <field name="unit_price"/>
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+       <record id="view_list_reservation" model="ir.ui.view">
+           <field name="name">Hotel Reservation</field>
+           <field name="model">hotel.reservation</field>
+           <field name="arch" type="xml">
+               <list>
+                   <field name="name"/>
+                   <field name="room_id"/>
+                   <field name="check_in"/>
+                   <field name="check_out"/>
+                   <field name="state" widget="badge"
+                           decoration-success="state == 'checked_in'"
+                           decoration-danger="state == 'cancelled'"
+                           decoration-info="state == 'reserved'"
+                           decoration-warning="state == 'checked_out'"/>
+               </list>
+           </field>
+       </record>
+
+
+
+
+       <record id="reservation_action" model="ir.actions.act_window">
+             <field name="name">Hotel Reservations</field>
+             <field name="res_model">hotel.reservation</field>
+             <field name="view_mode">calendar,list,form</field>
+             <field name="view_id" ref="view_hotel_reservation_calendar"/>
+         </record>
+
+
+
+   </data>
+</odoo>

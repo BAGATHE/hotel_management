@@ -39,7 +39,7 @@
                                 </td>
                                 <td>
                                     <t t-if="res.state == 'checked_in'">
-                                        <a t-att-href="'/hotel/reservation/cancel?reservation_id=%s' % (res.id)"
+                                        <a t-att-href="'/hotel/reservation/free?reservation_id=%s' % (res.id)"
                                            class="btn btn-info mt-3 w-100">
                                             Free room
                                         </a>
