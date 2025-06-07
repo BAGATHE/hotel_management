@@ -132,9 +132,6 @@ class CustomerController(http.Controller):
                 'equipment_id': int(eq_id),
                 'unit_price':1
             })
-        room = request.env['hotel.room'].sudo().browse(int(room_id)) if room_id else None
-        if room and room.exists():
-            room.write({'state':'reserved'})
 
         return request.redirect('/hotel/reservations')
 
@@ -232,8 +229,6 @@ class CustomerController(http.Controller):
                     'equipment_id': int(eq_id),
                     'unit_price': 1
                 })
-
-            request.env['hotel.room'].sudo().browse(room_id).write({'state': 'reserved'})
 
             return request.make_json_response(OdooResponseUtils.success(
                 data={

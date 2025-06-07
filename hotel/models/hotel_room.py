@@ -9,9 +9,9 @@ class HotelRoom(models.Model):
     base_price = fields.Float(string='Hotel Room Base Price')
     price = fields.Float(string='Hotel Room Price',compute='_compute_price',store=True,readonly=True)
     max_allowed_person = fields.Integer(string='Hotel Room Max Allowed', required=True,default=2)
+
     state = fields.Selection([
         ('available', 'Available'),
-        ('reserved', 'Reserved'),
         ('occupied', 'Occupied'),
     ], string="State", default='available', store=True,readonly=True)
 
@@ -24,6 +24,10 @@ class HotelRoom(models.Model):
         'hotel.room.equipment',
         'room_id',
         string='Equipments')
+
+    reservation_ids = fields.One2many('hotel.reservation','room_id',string='Reservations')
+    active_reservation = fields.Integer(string='Active Reservation', compute='_compute_active_reservation',store=True,readonly=True)
+
     _sql_constraints = [
         ('check_unique_name', 'unique(name)','name already exists'),
         ('check_base_price','check(base_price > 0)','base_price must be greater than 0'),
@@ -50,3 +54,28 @@ class HotelRoom(models.Model):
                 room.price = room.base_price + total_equipment
             else:
                 room.price = room.base_price
+
+    def action_view_reservations(self):
+        self.ensure_one()
+        return ({
+            'type': 'ir.actions.act_window',
+            'name': 'Room Reservations',
+            'res_model': 'hotel.reservation',
+            'view_mode': 'list',
+            'view_id': self.env.ref('hotel.view_room_reservations_popup').id,
+            'target': 'new',
+            'domain': [('room_id', '=', self.id)],
+            'context': {
+                'default_room_id': self.id,
+                'search_default_group_by_customer': 1
+            }
+        })
+
+    @api.depends('reservation_ids.state')
+    def _compute_active_reservation(self):
+        for room in self:
+            count = 0
+            for reservation in room.reservation_ids:
+                if reservation.state != 'cancelled' and reservation.state != 'checked_out':
+                    count+=1
+            room.active_reservation = count

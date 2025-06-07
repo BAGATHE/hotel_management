@@ -1,6 +1,7 @@
 from odoo import fields, models,api,_
 from datetime import date
 from odoo.exceptions import ValidationError, UserError
+from odoo import fields
 class HotelReservation(models.Model):
     _name = 'hotel.reservation'
     _description = 'Hotel Reservation'
@@ -92,8 +93,6 @@ class HotelReservation(models.Model):
             if self._has_overlapping_reservation(vals.get('room_id'),vals.get('check_in'),vals.get('check_out')):
                 raise UserError(_("The room is already reserved during this period"))
         reservations = super(HotelReservation, self).create(vals_list)
-        rooms = reservations.mapped('room_id')
-        rooms.write({'state': 'reserved'})
         return reservations
 
 
@@ -116,6 +115,17 @@ class HotelReservation(models.Model):
         room = self.env['hotel.room'].sudo().browse(int(self.room_id.id)) if self.room_id.id else None
         room.write({'state': 'available'})
 
+    def action_open_reservation_form(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Reservation',
+            'view_mode': 'form',
+            'res_model': 'hotel.reservation',
+            'res_id': self.id,
+            'target': 'current',
+        }
+
     def _has_overlapping_reservation(self, room_id, check_in, check_out, exclude_reservation=None):
         domain = [
             ('room_id', '=', room_id),
@@ -129,8 +139,8 @@ class HotelReservation(models.Model):
 
     def write(self, vals):
         if 'check_in' in vals or 'check_out' in vals:
-            check_in = vals.get('check_in', self.check_in)
-            check_out = vals.get('check_out', self.check_out)
+            check_in = fields.Date.to_date(vals.get('check_in', self.check_in))
+            check_out = fields.Date.to_date(vals.get('check_out', self.check_out))
             if check_out <= check_in:
                 raise UserError(_("Invalid dates - Duration must be at least 1 day"))
 
