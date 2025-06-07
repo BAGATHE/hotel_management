@@ -54,7 +54,7 @@
                 </section>
                 <section class="container py-5">
                     <div class="text-center mb-4">
-                        <a t-att-href="'/hotel/reserve'"  class="btn btn-primary btn-lg px-5 py-3" >
+                        <a t-att-href="'/hotel/reservations'"  class="btn btn-primary btn-lg px-5 py-3" >
                             <i class="fa fa-calendar-check-o mr-2"/> View my reservation
                         </a>
                     </div>
