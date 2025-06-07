@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "3f79ef06-d660-49ee-9c6c-dbc4fd30cdce",
+		"name": "TD4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33805957"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"jsonrpc\": \"2.0\", \n    \"params\": {\n        \"db\": \"{{db}}\", \n        \"login\": \"{{login_customer}}\", \n        \"password\": \"{{login_customer}}\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/web/session/authenticate",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"web",
+						"session",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "liste equipement",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"params\": {\n        \"service\": \"object\",\n        \"method\": \"execute_kw\",\n        \"args\": [\n            \"{{db}}\",\n            {{user_id}},\n            \"{{password_admin}}\",\n            \"hotel.equipment\",  \n            \"search_read\",\n            [\n                [], \n                []\n            ]\n        ]\n    },\n    \"id\": 789\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/jsonrpc",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"jsonrpc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list equipepment v2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/equipments",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"equipments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reservation",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "customer",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "customer",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"room_id\": 1,\n  \"checkin\": \"2025-06-10\",\n  \"checkout\": \"2025-06-12\",\n  \"guests\" : 2,\n  \"partner_id\": 2,\n  \"equipment_ids\": [4, 5]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/hotel/reservation",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"hotel",
+						"reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list chambre disponible",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"checkin\": \"2025-06-10\",\n  \"checkout\": \"2025-06-12\",\n  \"guests\":4\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/hotel/rooms",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"hotel",
+						"rooms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list reservation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/reservations",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "liberé chambre",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"reservation_id\" : 18\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/hotel/reservation/free",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"hotel",
+						"reservation",
+						"free"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

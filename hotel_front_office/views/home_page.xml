@@ -39,6 +39,7 @@
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
+                                                <option value="3">4</option>
                                             </select>
                                         </div>
 
@@ -53,6 +54,11 @@
                 </section>
                 <section class="container py-5">
                     <h1 class="text-center">free room of the day</h1>
+                    <div class="text-center mb-4">
+                        <a t-att-href="'/'"  class="btn btn-primary btn-lg px-5 py-3" >
+                            <i class="fa fa-refresh mr-2"/> Refresh
+                        </a>
+                    </div>
     <div class="row">
         <t t-foreach="rooms" t-as="room">
             <div class="col-md-4 mb-4">
