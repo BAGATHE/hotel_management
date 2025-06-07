@@ -63,7 +63,7 @@ class HotelReservation(models.Model):
     @api.depends('reservation_line_ids.total_price','room_price')
     def _compute_total_price(self):
         for reservation in self:
-            reservation.total_price = self.room_price +  sum(reservation.reservation_line_ids.mapped('total_price'))
+            reservation.total_price = reservation.room_price +  sum(reservation.reservation_line_ids.mapped('total_price'))
 
     @api.onchange('check_in')
     def _onchange_check_in(self):

@@ -37,6 +37,7 @@ Long description of module's purpose
         'demo/room_demo.xml',
         'demo/equipment_demo.xml',
         'demo/room_equipment_demo.xml',
+        'demo/reservation_demo.xml',
 
     ],
     'installable': True,
